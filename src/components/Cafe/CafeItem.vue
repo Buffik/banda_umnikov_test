@@ -23,6 +23,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { type ICafe } from '../../api/models/CafeInterface'
+import placeholderPhoto from '../../assets/images/no-image.webp'
 
 const cafeData = defineProps<{
   cafe: ICafe
@@ -31,7 +32,7 @@ const cafeData = defineProps<{
 const hasBusinessLunch = computed(() =>
   cafeData.cafe.business_lunch ? 'Есть бизнес-ланч' : 'А бизнес-ланча тут нет :('
 )
-const hasImage = computed(() => cafeData.cafe.photo || '../../../public/no-image.webp')
+const hasImage = computed(() => cafeData.cafe.photo || placeholderPhoto)
 const imageStyle = computed(() => (cafeData.cafe.photo ? 'has-photo' : 'photo-placeholder'))
 
 function hasInfo(info: string | number) {
