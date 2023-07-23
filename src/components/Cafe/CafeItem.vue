@@ -1,6 +1,6 @@
 <template>
   <div class="cafe-wrapper">
-    <h2 class="title">{{ cafe.name }}</h2>
+    <h2 class="title">{{ hasInfo(cafe.name) }}</h2>
     <div class="image-wrapper">
       <img :class="imageStyle" :src="hasImage" :alt="cafe.name" />
     </div>
@@ -48,8 +48,12 @@ function hasInfo(info: string | number) {
 }
 
 .title {
-  margin-bottom: 0.5rem;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 80%;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
+  text-align: center;
 }
 
 .additional-title {
@@ -72,6 +76,6 @@ function hasInfo(info: string | number) {
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  object-fit: fill;
+  object-fit: contain;
 }
 </style>
