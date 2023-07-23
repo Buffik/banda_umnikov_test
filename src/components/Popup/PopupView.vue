@@ -17,7 +17,6 @@
       </div>
       <div class="button-control-wrapper">
         <button class="button" @click="getAnotherCafe">Не хочу сюда, давай выберем заново!</button>
-        <a :href="shareLink" class="button" target="_blank">Поделиться с друзьями в telegram</a>
       </div>
     </div>
   </div>
@@ -59,18 +58,12 @@ const getRandomCafe = (): ICafe => {
 }
 
 const randomCafe = ref<ICafe>(initialCafe)
-const shareLink = ref('')
 
 const popupVisible = ref(false)
 
 const showPopup = () => {
   popupVisible.value = true
   randomCafe.value = getRandomCafe()
-  shareLink.value = `https://telegram.me/share/url?url=${
-    randomCafe.value.address || 'Адрес посмотрим по пути'
-  }&text=${randomCafe.value.name}`
-  console.log(shareLink.value)
-
   document.body.classList.add('freeze')
 }
 
