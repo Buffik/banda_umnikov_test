@@ -1,80 +1,39 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import HomeView from './views/HomeView.vue'
+import LogoView from '@/components/Logo/LogoView.vue'
 </script>
 
 <template>
   <header>
     <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/cafe">About</RouterLink>
-      </nav>
+      <LogoView />
+      <h1 class="title">И куда же мы отправимся покушать сегодня, ммм?</h1>
     </div>
   </header>
 
-  <RouterView />
+  <HomeView />
+  <footer class="footer"></footer>
 </template>
 
 <style scoped>
 header {
   line-height: 1.5;
-  max-height: 100vh;
+  padding: 20px 0 20px 0;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
+.wrapper {
   text-align: center;
-  margin-top: 2rem;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
+@media (max-width: 1024px) {
   header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    line-height: 1.5;
+    padding-top: 0;
+    padding-bottom: 1rem;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+  .title {
+    font-size: 1.5rem;
   }
 }
 </style>

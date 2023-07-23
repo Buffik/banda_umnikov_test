@@ -1,4 +1,4 @@
-import axios, { type AxiosRequestConfig, type AxiosInstance, type AxiosResponse } from 'axios'
+import axios, { type AxiosRequestConfig, type AxiosInstance } from 'axios'
 
 const apiHost = 'https://bandaumnikov.ru/api/test/site/'
 const configuration: AxiosRequestConfig = {

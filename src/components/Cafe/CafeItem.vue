@@ -1,16 +1,22 @@
 <template>
-  <div>
+  <div class="cafe-wrapper">
     <h2 class="title">{{ cafe.name }}</h2>
-    <img class="photo" :src="cafe.photo" :alt="cafe.name" />
-    <p class="address">{{ cafe.address }}</p>
-    <p class="landmark">{{ cafe.landmark }}</p>
-    <p class="cuisine">{{ cafe.cuisine }}</p>
-    <p class="distance">{{ cafe.distance }}</p>
-    <p class="time">{{ cafe.time }}</p>
-    <p :class="hasBusinessLunch">
-      {{ cafe.business_lunch ? 'Есть бизнес-ланч' : 'А бизнес-ланча тут нет :(' }}
+    <div class="image-wrapper">
+      <img :class="imageStyle" :src="hasImage" :alt="cafe.name" />
+    </div>
+    <p class="address"><span class="additional-title">Адрес: </span>{{ hasInfo(cafe.address) }}</p>
+    <p class="landmark">
+      <span class="additional-title">Как пройти: </span>{{ hasInfo(cafe.landmark) }}
     </p>
-    <p class="price">{{ cafe.price }}</p>
+    <p class="cuisine"><span class="additional-title">Кухня: </span>{{ hasInfo(cafe.cuisine) }}</p>
+    <p class="distance">
+      <span class="additional-title">Расстояние: </span>{{ hasInfo(cafe.distance) }}
+    </p>
+    <p class="time"><span class="additional-title">Время: </span>{{ hasInfo(cafe.time) }}</p>
+    <p :class="hasBusinessLunch">
+      {{ hasBusinessLunch }}
+    </p>
+    <p class="price"><span class="additional-title">Стоимость: </span>{{ hasInfo(cafe.price) }}</p>
   </div>
 </template>
 
@@ -22,6 +28,50 @@ const cafeData = defineProps<{
   cafe: ICafe
 }>()
 
-const hasBusinessLunch = computed(() => (cafeData.cafe.business_lunch ? 'hasLunch' : 'noLunch'))
+const hasBusinessLunch = computed(() =>
+  cafeData.cafe.business_lunch ? 'Есть бизнес-ланч' : 'А бизнес-ланча тут нет :('
+)
+const hasImage = computed(() => cafeData.cafe.photo || '../../../public/no-image.webp')
+const imageStyle = computed(() => (cafeData.cafe.photo ? 'has-photo' : 'photo-placeholder'))
+
+function hasInfo(info: string | number) {
+  return info || 'Информация отсутствует'
+}
 </script>
-<style></style>
+<style scoped>
+.cafe-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  border-radius: 32px;
+  box-shadow: 0 0 24px rgba(49, 49, 49, 0.28);
+}
+
+.title {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.additional-title {
+  font-weight: 700;
+  color: #dd2413;
+}
+
+.image-wrapper {
+  height: 250px;
+}
+
+.has-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: fill;
+}
+</style>
