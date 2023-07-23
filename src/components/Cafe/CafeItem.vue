@@ -17,17 +17,26 @@
       {{ hasBusinessLunch }}
     </p>
     <p class="price"><span class="additional-title">Стоимость: </span>{{ hasInfo(cafe.price) }}</p>
+    <div class="share-button-wrapper">
+      <a :href="shareLink" class="button" target="_blank">Здесь пообедаем! Поделиться в telegram</a>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { type ICafe } from '../../api/models/CafeInterface'
 import placeholderPhoto from '../../assets/images/no-image.webp'
 
 const cafeData = defineProps<{
   cafe: ICafe
 }>()
+
+const shareLink = ref(
+  `https://telegram.me/share/url?url=${cafeData.cafe.address || 'Адрес посмотрим по пути'}&text=${
+    cafeData.cafe.name
+  }`
+)
 
 const hasBusinessLunch = computed(() =>
   cafeData.cafe.business_lunch ? 'Есть бизнес-ланч' : 'А бизнес-ланча тут нет :('
@@ -78,5 +87,17 @@ function hasInfo(info: string | number) {
   height: 100%;
   border-radius: 10px;
   object-fit: contain;
+}
+
+.price {
+  margin-bottom: 20px;
+}
+
+.share-button-wrapper {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0 20px 0;
 }
 </style>
